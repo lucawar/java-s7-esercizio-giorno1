@@ -29,7 +29,7 @@ public class Runner implements CommandLineRunner {
 			String email = faker.internet().emailAddress();
 			String password = "1234";
 			NewUserPayload user = new NewUserPayload(username, name, surname, email, password);
-			userService.save(user);
+			// userService.save(user);
 		}
 
 	}
