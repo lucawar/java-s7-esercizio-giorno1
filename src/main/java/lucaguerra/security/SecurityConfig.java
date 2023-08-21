@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -25,11 +27,14 @@ public class SecurityConfig {
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/dispositivo/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/utenteDispositivo/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
+	}
+
+	@Bean
+	PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder(11);
 	}
 }
