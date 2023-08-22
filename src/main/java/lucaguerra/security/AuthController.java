@@ -3,6 +3,7 @@ package lucaguerra.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class AuthController {
 
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User saveUser(@RequestBody NewUserPayload body) {
+	public User saveUser(@RequestBody @Validated NewUserPayload body) {
 
 		body.setPassword(bcrypt.encode(body.getPassword()));
 		User created = userService.save(body);

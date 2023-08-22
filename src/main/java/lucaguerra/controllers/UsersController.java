@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,27 +29,31 @@ public class UsersController {
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User saveUser(@RequestBody lucaguerra.payload.NewUserPayload body) {
+	public User saveUser(@RequestBody NewUserPayload body) {
 		User createdUser = userService.save(body);
 		return createdUser;
 	}
 
 	@GetMapping("")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<User> getUsers() {
 		return userService.getUsers();
 	}
 
 	@GetMapping("/{userId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public User findById(@PathVariable UUID userId) {
 		return userService.findById(userId);
 	}
 
 	@PutMapping("/{userId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public User updateUser(@PathVariable UUID userId, @RequestBody NewUserPayload body) {
 		return userService.findByIdAndUpdate(userId, body);
 	}
 
 	@DeleteMapping("/{userId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteUser(@PathVariable UUID userId) {
 		userService.findByIdAndDelete(userId);

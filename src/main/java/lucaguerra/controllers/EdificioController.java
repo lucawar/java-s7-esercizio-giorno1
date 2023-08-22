@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,17 +40,20 @@ public class EdificioController {
 	}
 
 	@GetMapping("/{edificioId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Edificio findById(@PathVariable UUID edificioId) {
 		return edificioService.findById(edificioId);
 	}
 
 	@PutMapping("/{edificioId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Edificio updateEdificio(@PathVariable UUID edificioId, @RequestBody NewEdificioPayload body) {
 		return edificioService.findByIdAndUpdate(edificioId, body);
 	}
 
 	@DeleteMapping("/{edificioId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public void deleteEdificio(@PathVariable UUID edificioId) {
 		edificioService.findByIdAndDelete(edificioId);
 	}
