@@ -2,7 +2,6 @@ package lucaguerra.entities;
 
 import java.util.UUID;
 
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,7 +20,6 @@ public class Edificio {
 	@GeneratedValue
 	private UUID id;
 	private String name;
-	@Convert(converter = EdificioConverter.class)
 	private String codice;
 
 	public Edificio(String name, String codice) {

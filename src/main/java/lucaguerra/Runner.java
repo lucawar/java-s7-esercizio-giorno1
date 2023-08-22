@@ -41,10 +41,11 @@ public class Runner implements CommandLineRunner {
 		if (utentiDb.isEmpty()) {
 
 			for (int i = 0; i < 10; i++) {
-				String username = faker.funnyName().name();
+
 				String name = faker.name().firstName();
 				String surname = faker.name().lastName();
-				String email = faker.internet().emailAddress();
+				String username = name.toLowerCase() + "_" + surname.toLowerCase();
+				String email = name.toLowerCase() + "." + surname.toLowerCase() + "@email.com";
 				String password = "1234";
 				NewUserPayload user = new NewUserPayload(username, name, surname, email, password);
 				authController.saveUser(user);

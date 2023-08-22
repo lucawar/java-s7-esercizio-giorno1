@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lucaguerra.entities.Edificio;
@@ -26,6 +30,13 @@ public class EdificioService {
 	// TORNA LA LISTA DEGLI EDIFICI
 	public List<Edificio> getEdificio() {
 		return edificioRepo.findAll();
+	}
+
+	// TORNA LA LISTA DEGLI EDIFICI CON L'IMPAGINAZIONE
+	public Page<Edificio> find(int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+
+		return edificioRepo.findAll(pageable);
 	}
 
 	// CERCA EDIFICIO TRAMITE ID
