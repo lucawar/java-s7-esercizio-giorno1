@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
+import lucaguerra.controllers.EdificioController;
 import lucaguerra.entities.User;
+import lucaguerra.payload.NewEdificioPayload;
 import lucaguerra.payload.NewUserPayload;
 import lucaguerra.repositories.UserRepository;
 import lucaguerra.security.AuthController;
@@ -23,6 +25,9 @@ public class Runner implements CommandLineRunner {
 
 	@Autowired
 	UserRepository utenteRepo;
+
+	@Autowired
+	EdificioController edificioController;
 
 	@Autowired
 	AuthController authController;
@@ -45,6 +50,14 @@ public class Runner implements CommandLineRunner {
 				authController.saveUser(user);
 
 			}
+		}
+
+		for (int i = 0; i < 10; i++) {
+			String nomeEdificio = faker.company().name();
+			String codice = faker.regexify("[A-Za-z0-9]{8}");
+			NewEdificioPayload edificio = new NewEdificioPayload(nomeEdificio, codice);
+			// edificioController.saveEdificio(edificio);
+
 		}
 
 	}
