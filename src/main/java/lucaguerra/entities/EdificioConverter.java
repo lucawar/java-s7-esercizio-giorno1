@@ -6,12 +6,15 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import jakarta.persistence.AttributeConverter;
 
 public class EdificioConverter implements AttributeConverter<String, String> {
 
 	private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
-	private static final String secret = "mysup3rs3cr3tttt";
+	@Value("${spring.jwt.secret}")
+	private String secret;
 
 	@Override
 	public String convertToDatabaseColumn(String Edificio) {

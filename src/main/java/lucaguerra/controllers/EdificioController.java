@@ -47,7 +47,7 @@ public class EdificioController {
 //	}
 
 	@GetMapping("")
-	public Page<Edificio> getUsers(@RequestParam(defaultValue = "0") int page,
+	public Page<Edificio> getEdifici(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
 		return edificioService.find(page, size, sortBy);
 	}

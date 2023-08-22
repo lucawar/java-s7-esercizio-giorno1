@@ -14,7 +14,7 @@ import lucaguerra.entities.EdificioConverter;
 @AllArgsConstructor
 public class NewEdificioPayload {
 
-	@NotNull(message = "L'username è obbligatorio")
+	@NotNull(message = "il nome è obbligatorio")
 	private String name;
 	@Convert(converter = EdificioConverter.class)
 	@NotNull(message = "Il codice è obbligatorio")
