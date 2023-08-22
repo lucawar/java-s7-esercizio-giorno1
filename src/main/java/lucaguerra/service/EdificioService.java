@@ -17,9 +17,6 @@ public class EdificioService {
 	@Autowired
 	EdificioRepository edificioRepo;
 
-	@Autowired
-	EdificioService edificioservice;
-
 	// SALVA NUOVO EDIFICIO
 	public Edificio save(NewEdificioPayload body) {
 		Edificio newEdificio = new Edificio(body.getName(), body.getCodice());

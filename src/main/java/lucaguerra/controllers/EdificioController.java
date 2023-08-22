@@ -44,14 +44,14 @@ public class EdificioController {
 	}
 
 	@PutMapping("/{edificioId}")
-	public Edificio updateEdificio(@PathVariable UUID dispositivoId, @RequestBody NewEdificioPayload body) {
-		return edificioService.findByIdAndUpdate(dispositivoId, body);
+	public Edificio updateEdificio(@PathVariable UUID edificioId, @RequestBody NewEdificioPayload body) {
+		return edificioService.findByIdAndUpdate(edificioId, body);
 	}
 
 	@DeleteMapping("/{edificioId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteEdificio(@PathVariable UUID dispositivoId) {
-		edificioService.findByIdAndDelete(dispositivoId);
+	public void deleteEdificio(@PathVariable UUID edificioId) {
+		edificioService.findByIdAndDelete(edificioId);
 	}
 
 }
