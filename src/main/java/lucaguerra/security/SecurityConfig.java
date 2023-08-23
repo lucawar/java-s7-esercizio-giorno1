@@ -20,6 +20,9 @@ public class SecurityConfig {
 	@Autowired
 	JWTAuthFilter jwtFilter;
 
+	@Autowired
+	CorsFilter corsFilter;
+
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -33,6 +36,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
 		return http.build();
 	}
 
